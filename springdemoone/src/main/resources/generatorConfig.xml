@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  
+    <!-- classPathEntry:数据库的JDBC驱动--> 
+    <classPathEntry location="B:\apache-6\apache-tomcat-6.0.30\lib\mysql-connector-java-5.1.30.jar" /> 
+  
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+      
+         <!-- 去除自动生成的注释 -->
+        <commentGenerator><property name="suppressAllComments" value="true" /></commentGenerator> 
+      
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+            connectionURL="jdbc:mysql://127.0.0.1:3306/world"  
+              
+            userId="root"     
+            password="root"> 
+        </jdbcConnection>
+      
+        <javaTypeResolver >  
+            <property name="forceBigDecimals" value="false" />   
+        </javaTypeResolver>
+              
+        <!-- targetProject:自动生成model代码的位置 -->   
+        <javaModelGenerator targetPackage="com.chenbo.gen.model" targetProject="C:\">   
+            <property name="enableSubPackages" value="true" />   
+            <property name="trimStrings" value="true" />  
+        </javaModelGenerator>
+          
+        <!-- targetProject:自动生成mappers代码的位置 -->   
+        <sqlMapGenerator targetPackage="com.chenbo.gen.mappers"  targetProject="C:\">     
+             <property name="enableSubPackages" value="true" />   
+        </sqlMapGenerator>
+          
+        <!-- targetProject:自动生成dao代码的位置 -->   
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chenbo.gen.dao"  targetProject="C:\">    
+            <property name="enableSubPackages" value="true" /> 
+        </javaClientGenerator>
+          
+              
+        <!-- tableName:用于自动生成代码的数据库表;domainObjectName:对应于数据库表的javaBean类名-->
+        <table  tableName="user" domainObjectName="user" >
+          
+        </table> 
+    </context>  
+      
+</generatorConfiguration>

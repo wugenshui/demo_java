@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		">
+	<bean id="student" class="com.wyl.cn.Student" autowire="byName">
+		<!-- 
+		<property name="name" value="王拥林"></property>
+		<property name="age" value="18"></property> -->
+		<!-- <property name="head" ref="head"></property>-->
+		<constructor-arg index="0" value="wanglin"></constructor-arg>
+		<constructor-arg index="1" value="31"></constructor-arg>
+		<property name="qingfus"><list>
+		<value>小英</value>
+		<value>小娜</value>
+		<value>小芳</value>
+		</list></property>
+	</bean>
+	
+	<context:component-scan base-package="com.wyl.com"></context:component-scan>
+	
+	<bean id="head" class="com.wyl.cn.Head">
+		<property name="name" value="我石头11"></property>
+		<property name="isHaveZui" value="true"></property>
+	</bean>
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">        
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />       
+	
+	    <property name="url" value="jdbc:mysql://localhost:3306/world" />       
+	
+	    <property name="username" value="root" />       
+	
+	    <property name="password" value="dameinv_123" />    
+	    
+	    <property name="maxActive">10</property>   
+
+	    <property name="maxIdle">6</property>   
+
+	</bean>
+	
+	
+	<!-- 配置事物管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 增加事物的支持 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	
+</beans>
